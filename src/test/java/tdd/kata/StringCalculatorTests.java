@@ -31,4 +31,9 @@ public class StringCalculatorTests {
 	public void add_threeNumberSimple_returnSum() {
 		testAddMethod("1,2,3", 6);
 	}
+	
+	@Test
+	public void add_threeNumberWithNewLineDelimiter_returnSum() {
+		testAddMethod("1\n2,3", 6);
+	}
 }
