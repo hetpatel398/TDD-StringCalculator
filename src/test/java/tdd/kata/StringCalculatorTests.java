@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.net.http.WebSocket;
 
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -11,7 +12,7 @@ import org.mockito.Mockito;
 public class StringCalculatorTests {
 
 	private void testAddMethod(String input, int expectedReturnValue) {
-		StringCalculator stringCalculator=new StringCalculator(Mockito.mock(Logger.class));
+		StringCalculator stringCalculator=new StringCalculator(Mockito.mock(Logger.class), Mockito.mock(WebSocket.class));
 		int result = stringCalculator.add(input);
 		assertEquals(expectedReturnValue, result);
 	}
@@ -47,7 +48,7 @@ public class StringCalculatorTests {
 	
 	@Test
 	public void add_negativeNumber_raiseException() {
-		StringCalculator stringCalculator = new StringCalculator(Mockito.mock(Logger.class));
+		StringCalculator stringCalculator = new StringCalculator(Mockito.mock(Logger.class), Mockito.mock(WebSocket.class));
 		try {
 			stringCalculator.add("-1,2");
 		}
@@ -80,10 +81,23 @@ public class StringCalculatorTests {
 	@Test
 	public void add_testingLogger_shouldLogResult() {
 		Logger mockLogger = Mockito.mock(Logger.class);
-		StringCalculator stringCalculator=new StringCalculator(mockLogger);
+		StringCalculator stringCalculator=new StringCalculator(mockLogger, Mockito.mock(WebSocket.class));
 		
 		stringCalculator.add("1,2");
 		
 		Mockito.verify(mockLogger).log(Level.INFO, "Sum = 3");
+	}
+	
+	@Test
+	public void add_loggerThrowsExceptionEveryTime_callWebServiceAfterException() {
+		Logger stubLogger = Mockito.mock(Logger.class);
+		Mockito.doThrow(new RuntimeException("RuntimeException from logger")).when(stubLogger).log((Level) Mockito.any(), Mockito.anyString());
+		
+		WebSocket mockWebServiceInterface = Mockito.mock(WebSocket.class);
+		StringCalculator stringCalculator=new StringCalculator(stubLogger, mockWebServiceInterface);
+		
+		stringCalculator.add("1");
+		
+		Mockito.verify(mockWebServiceInterface).sendText(Mockito.contains("RuntimeException"), Mockito.anyBoolean());
 	}
 }

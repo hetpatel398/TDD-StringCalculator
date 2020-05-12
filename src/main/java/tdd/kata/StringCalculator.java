@@ -2,14 +2,17 @@ package tdd.kata;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.net.http.WebSocket;
 import java.util.ArrayList;
 
 public class StringCalculator {
 
 	private Logger logger;
+	private WebSocket webSocket;
 	
-	public StringCalculator(Logger logger) {
+	public StringCalculator(Logger logger, WebSocket webSocket) {
 		this.logger=logger;
+		this.webSocket=webSocket;
 	}
 
 	private String[] getSplit(String string) {
