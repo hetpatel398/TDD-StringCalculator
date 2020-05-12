@@ -6,7 +6,13 @@ public class StringCalculator {
 		if(string.length()==0)
 			return 0;
 		
-		String[] splits=string.split(",");
+		int sum=findSum(string);
+		
+		return sum;
+	}
+	
+	private int findSum(String string) {
+		String[] splits=string.split(",|\n");
 		
 		int sum=0;
 		for(String num:splits) {
@@ -16,5 +22,4 @@ public class StringCalculator {
 		
 		return sum;
 	}
-
 }
