@@ -10,8 +10,15 @@ public class StringCalculator {
 		
 		String splitRegex=",|\n"; //Default regex for split
 		if(string.startsWith("//")) {
-			splitRegex=string.substring(2,3);
-			string=string.substring(4);
+			if(string.startsWith("//[")) {
+				splitRegex = string.substring(3, string.indexOf("]\n"));
+				splitRegex = splitRegex.replaceAll("\\*", "\\\\*");
+				string = string.substring(string.indexOf('\n')+1);
+			}
+			else {
+				splitRegex=string.substring(2,3);
+				string=string.substring(4);
+			}
 		}
 		
 		int sum=findSum(string, splitRegex);
