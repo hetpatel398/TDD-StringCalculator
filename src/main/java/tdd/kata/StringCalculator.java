@@ -1,20 +1,15 @@
 package tdd.kata;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class StringCalculator {
 
-	public int add(String string) {
-		if(string.length()==0)
-			return 0;
+	private String[] getSplit(String string) {
+		String splitRegex=",|\n";
 		
-		String splitRegex=",|\n"; //Default regex for split
 		if(string.startsWith("//")) {
 			if(string.startsWith("//[")) {
-				String[] splitRegexes = string.substring(3, string.indexOf("]\n")).split("\\]\\[");
-				splitRegex = String.join("|", Arrays.asList(splitRegexes));
-				splitRegex = splitRegex.replaceAll("\\*", "\\\\*").replaceAll("\\+", "\\\\+");
+				splitRegex = cleanRegex(string.substring(3, string.indexOf("]\n")).split("\\]\\["));
 				string = string.substring(string.indexOf('\n')+1);
 			}
 			else {
@@ -22,20 +17,36 @@ public class StringCalculator {
 				string=string.substring(4);
 			}
 		}
+		return string.split(splitRegex);
+	}
+	
+	private String cleanRegex(String[] split) {
+		String[] regexSpecialChars= {"*", "+", "|", ".", "$", "^", "?"};
+		for(int i=0; i<split.length; i++) {
+			for(String specialChar:regexSpecialChars)
+				split[i]=split[i].replaceAll("\\"+specialChar, "\\\\"+specialChar);
+		}
+		return String.join("|", split);
+	}
+
+	public int add(String string) {
+		if(string.length()==0)
+			return 0;
 		
-		int sum=findSum(string, splitRegex);
+		String[] nums=getSplit(string);
+		
+		int sum=findSum(nums);
 		
 		return sum;
 	}
 	
-	private int findSum(String string, String splitRegex) {
-		String[] splits=string.split(splitRegex);
+	private int findSum(String[] nums) {
 		
 		ArrayList<String> negatives=new ArrayList<String>();
 		boolean isNegative = false;
 		
 		int sum=0;
-		for(String num:splits) {
+		for(String num:nums) {
 			int num_i=Integer.parseInt(num);
 			if(num_i<0) {
 				isNegative=true;
