@@ -30,9 +30,11 @@ public class StringCalculator {
 			int num_i=Integer.parseInt(num);
 			if(num_i<0) {
 				isNegative=true;
-				negatives.add(num);
+				negatives.add(Integer.toString(num_i));
 				continue;
 			}
+			else if(num_i>1000)
+				continue;
 			sum+=num_i;
 		}
 		
