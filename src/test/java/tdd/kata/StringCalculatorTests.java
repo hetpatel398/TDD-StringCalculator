@@ -58,4 +58,9 @@ public class StringCalculatorTests {
 	public void add_numberGreaterThan1000_returnSumIgnoringNumberGreaterThan1000() {
 		testAddMethod("1,1001", 1);
 	}
+	
+	@Test
+	public void add_threeNumbersWithMultiLengthDelimiter_returnSum() {
+		testAddMethod("//[***]\n1***2***3", 6);
+	}
 }
