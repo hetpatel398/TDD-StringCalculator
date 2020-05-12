@@ -12,5 +12,12 @@ public class StringCalculatorTests {
 		int result = stringCalculator.add("");
 		assertEquals(0, result);
 	}
+	
+	@Test
+	public void add_singleNumber_returnThatNumber() {
+		StringCalculator stringCalculator=new StringCalculator();
+		int result = stringCalculator.add("1");
+		assertEquals(1, result);
+	}
 
 }
