@@ -1,8 +1,15 @@
 package tdd.kata;
 
+import java.lang.System.Logger;
 import java.util.ArrayList;
 
 public class StringCalculator {
+
+	private Logger logger;
+	
+	public StringCalculator(Logger logger) {
+		this.logger=logger;
+	}
 
 	private String[] getSplit(String string) {
 		String splitRegex=",|\n";
