@@ -26,4 +26,9 @@ public class StringCalculatorTests {
 	public void add_twoNumberSimple_returnSum() {
 		testAddMethod("1,2", 3);
 	}
+	
+	@Test
+	public void add_threeNumberSimple_returnSum() {
+		testAddMethod("1,2,3", 6);
+	}
 }
