@@ -1,6 +1,7 @@
 package tdd.kata;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class StringCalculator {
 
@@ -11,8 +12,9 @@ public class StringCalculator {
 		String splitRegex=",|\n"; //Default regex for split
 		if(string.startsWith("//")) {
 			if(string.startsWith("//[")) {
-				splitRegex = string.substring(3, string.indexOf("]\n"));
-				splitRegex = splitRegex.replaceAll("\\*", "\\\\*");
+				String[] splitRegexes = string.substring(3, string.indexOf("]\n")).split("\\]\\[");
+				splitRegex = String.join("|", Arrays.asList(splitRegexes));
+				splitRegex = splitRegex.replaceAll("\\*", "\\\\*").replaceAll("\\+", "\\\\+");
 				string = string.substring(string.indexOf('\n')+1);
 			}
 			else {
