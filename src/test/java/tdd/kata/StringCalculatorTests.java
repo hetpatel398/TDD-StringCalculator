@@ -53,4 +53,9 @@ public class StringCalculatorTests {
 		}
 		assertTrue(false);
 	}
+	
+	@Test
+	public void add_numberGreaterThan1000_returnSumIgnoringNumberGreaterThan1000() {
+		testAddMethod("1,1001", 1);
+	}
 }
