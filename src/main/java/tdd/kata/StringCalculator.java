@@ -47,8 +47,12 @@ public class StringCalculator {
 		String[] nums=getSplit(string);
 		
 		int sum=findSum(nums);
-		
-		this.logger.log(Level.INFO, "Sum = "+sum);
+		try {
+			this.logger.log(Level.INFO, "Sum = "+sum);
+		}
+		catch (RuntimeException e) {
+			webSocket.sendText("RuntimeException while logging", true);
+		}
 		
 		return sum;
 	}
