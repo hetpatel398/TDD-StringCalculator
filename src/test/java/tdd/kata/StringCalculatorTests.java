@@ -68,4 +68,9 @@ public class StringCalculatorTests {
 	public void add_threeNumbersWithMultipleDelimiters_returnSum() {
 		testAddMethod("//[*][+]\n1*2+3", 6);
 	}
+	
+	@Test
+	public void add_fourNumbersWithMultipleMultiLengthDelimiters_returnSum() {
+		testAddMethod("//[***][++][,]\n1***2,3++4", 10);
+	}
 }
