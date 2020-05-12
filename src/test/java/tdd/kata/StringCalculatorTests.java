@@ -41,4 +41,16 @@ public class StringCalculatorTests {
 	public void add_twoNumberWithCustomDelimiter_returnSum() {
 		testAddMethod("//;\n1;2", 3);
 	}
+	
+	@Test
+	public void add_negativeNumber_raiseException() {
+		StringCalculator stringCalculator = new StringCalculator();
+		try {
+			stringCalculator.add("-1,2");
+		}
+		catch(IllegalArgumentException e) {
+			return;
+		}
+		assertTrue(false);
+	}
 }
