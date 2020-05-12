@@ -6,13 +6,19 @@ public class StringCalculator {
 		if(string.length()==0)
 			return 0;
 		
-		int sum=findSum(string);
+		String splitRegex=",|\n"; //Default regex for split
+		if(string.startsWith("//")) {
+			splitRegex=string.substring(2,3);
+			string=string.substring(4);
+		}
+		
+		int sum=findSum(string, splitRegex);
 		
 		return sum;
 	}
 	
-	private int findSum(String string) {
-		String[] splits=string.split(",|\n");
+	private int findSum(String string, String splitRegex) {
+		String[] splits=string.split(splitRegex);
 		
 		int sum=0;
 		for(String num:splits) {
