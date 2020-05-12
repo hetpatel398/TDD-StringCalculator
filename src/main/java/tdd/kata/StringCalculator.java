@@ -1,6 +1,7 @@
 package tdd.kata;
 
 import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 
 public class StringCalculator {
@@ -43,6 +44,8 @@ public class StringCalculator {
 		String[] nums=getSplit(string);
 		
 		int sum=findSum(nums);
+		
+		this.logger.log(Level.INFO, "Sum = "+sum);
 		
 		return sum;
 	}

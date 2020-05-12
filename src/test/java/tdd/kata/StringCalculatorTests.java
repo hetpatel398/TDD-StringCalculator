@@ -3,6 +3,7 @@ package tdd.kata;
 import static org.junit.Assert.*;
 
 import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -83,6 +84,6 @@ public class StringCalculatorTests {
 		
 		stringCalculator.add("1,2");
 		
-		Mockito.verify(mockLogger).log(java.lang.System.Logger.Level.INFO, "Sum = 3");
+		Mockito.verify(mockLogger).log(Level.INFO, "Sum = 3");
 	}
 }
