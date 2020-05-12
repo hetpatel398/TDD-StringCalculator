@@ -7,8 +7,10 @@ import org.junit.Test;
 public class StringCalculatorTests {
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void add_emptyString_returns0() {
+		StringCalculator stringCalculator=new StringCalculator();
+		int result = stringCalculator.add("");
+		assertEquals(0, result);
 	}
 
 }
