@@ -53,7 +53,6 @@ public class StringCalculator {
 		catch (RuntimeException e) {
 			webSocket.sendText("RuntimeException while logging", true);
 		}
-		
 		return sum;
 	}
 	

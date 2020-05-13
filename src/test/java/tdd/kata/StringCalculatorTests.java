@@ -2,6 +2,7 @@ package tdd.kata;
 
 import static org.junit.Assert.*;
 
+import java.io.PrintStream;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.net.http.WebSocket;
@@ -97,7 +98,7 @@ public class StringCalculatorTests {
 		StringCalculator stringCalculator=new StringCalculator(stubLogger, mockWebServiceInterface);
 		
 		stringCalculator.add("1");
-		
+		Mockito.mock(PrintStream.class);
 		Mockito.verify(mockWebServiceInterface).sendText(Mockito.contains("RuntimeException"), Mockito.anyBoolean());
 	}
 }
